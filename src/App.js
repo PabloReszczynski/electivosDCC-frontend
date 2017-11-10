@@ -16,7 +16,7 @@ class App extends Component {
             ((index % 3 == 0)
             ? (<Row />)
             : null),
-              <Col sm={6} md={4}>
+              <Col sm={12} md={4}>
                 <Electivo name={electivo.name} comments={electivo.comments} />
               </Col>
             ])}
