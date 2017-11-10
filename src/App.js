@@ -4,19 +4,21 @@ import logo from './logo.svg';
 import './App.css';
 import Electivo from './components/Electivo.jsx';
 import electivos from './electivos2.js';
-import { Clearfix, Col } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Clearfix>
-          {this.props.electivos.electivos.map(electivo => (
-            <Col>
-              <Electivo name={electivo.name} comments={electivo.comments} />
-            </Col>
-          ))}
-        </Clearfix>
+        <Grid>
+          <Row className="show-grid">
+            {this.props.electivos.electivos.map(electivo => (
+              <Col sm={6} md={3}>
+                <Electivo name={electivo.name} comments={electivo.comments} />
+              </Col>
+            ))}
+          </Row>
+        </Grid>
       </div>
     );
   }
