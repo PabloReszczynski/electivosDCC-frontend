@@ -9,14 +9,17 @@ import { Grid, Row, Col } from 'react-bootstrap';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{backgroundColor: '#E0E0E0'}}>
         <Grid>
           <Row className="show-grid">
-            {this.props.electivos.electivos.map(electivo => (
-              <Col sm={6} md={3}>
+            {this.props.electivos.electivos.map((electivo, index) => [
+            ((index % 3 == 0)
+            ? (<Row />)
+            : null),
+              <Col sm={6} md={4}>
                 <Electivo name={electivo.name} comments={electivo.comments} />
               </Col>
-            ))}
+            ])}
           </Row>
         </Grid>
       </div>
