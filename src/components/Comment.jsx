@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import { Panel, Glyphicon, Badge } from 'react-bootstrap';
 
 export default class Comment extends Component {
   render() {
     return (
-      <div>
-        <p>{this.props.txt}</p>
+      <Panel>
+        <Panel>{this.props.txt}</Panel>
         <div>
-          <span>+{(this.props.votes||{up:0}).up}</span>
-          <span>-{(this.props.votes||{down:0}).down}</span>
+          <Glyphicon glyph="thumbs-up">
+            <Badge>{(this.props.votes||{up:0}).up}</Badge>
+          </Glyphicon>
+
+          <Glyphicon glyph="thumbs-down">
+            <Badge>{(this.props.votes||{down:0}).down}</Badge>
+          </Glyphicon>
         </div>
-      </div>
+      </Panel>
     )
   }
 }
