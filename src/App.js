@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import Electivo from './components/Electivo.jsx';
-
-const comm1 = {
-  txt: "buena metodologia pero para personas que ya saben programar",
-  votes: {
-    up: 1,
-    down: 0
-  }
-}
-
-const comm2 = {
-  txt: "las tareas pueden tomar tiempo",
-  votes: {
-    up: 0,
-    down: 0
-  }
-}
+import electivos from './electivos2.js';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Electivo name="Taller de Progra" comments={[comm1, comm2]} />
+        {this.props.electivos.electivos.map(electivo => (
+          <Electivo name={electivo.name} comments={electivo.comments} />
+        ))}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  electivos
+});
+
+const mapDispatchToProps = dispatch => ({});
+
+const ElectivoApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
+export default ElectivoApp;
