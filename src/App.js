@@ -5,14 +5,25 @@ import './App.css';
 import Electivo from './components/Electivo.jsx';
 import electivos from './electivos2.js';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { fetchCoursesSuccess } from './state/store'
+import Api from './Api';
 
 class App extends Component {
+
+  componentDidMount() {
+    Api.fetchCourses().then((response) => {
+      this.props.fetchCoursesSuccess(response.data.electivos)
+    }).catch(() => {
+      alert('El sitio tiene problemas, por favor intentalo de nuevo mas tarde.')
+    })
+  }
+
   render() {
     return (
       <div className="App" style={{backgroundColor: '#E0E0E0'}}>
         <Grid>
           <Row className="show-grid">
-            {this.props.electivos.electivos.map((electivo, index) => [
+            {this.props.electivos.map((electivo, index) => [
             ((index % 3 == 0)
             ? (<Row />)
             : null),
@@ -28,10 +39,13 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  electivos
+  electivos: state.electivos
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  fetchCoursesSuccess: (courses) =>
+    dispatch(fetchCoursesSuccess(courses))
+});
 
 const ElectivoApp = connect(
   mapStateToProps,

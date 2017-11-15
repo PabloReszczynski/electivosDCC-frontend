@@ -1,16 +1,27 @@
 import { createStore } from 'redux';
 
 const initialState = {
-  electivos: [
-    {
-      comments: [{
-        txt: '',
-        votes: { up: 0, down: 0 }
-      }]
-    }
-  ]
+  electivos: []
 };
 
-const store = createStore((state, action) => state);
+const store = createStore((state = initialState, action) => {
+  switch (action.type) {
+    case 'FETCH_COURSES_SUCCESS':
+      return {
+        ...state,
+        electivos: action.payload.courses
+      }
+      break
+  }
+  return state
+});
+
+export const fetchCoursesSuccess = courses => ({
+  type: 'FETCH_COURSES_SUCCESS',
+  payload: {
+    courses: courses
+  }
+})
+
 
 export default store;
