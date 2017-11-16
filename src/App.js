@@ -21,18 +21,18 @@ class App extends Component {
   render() {
     return (
       <div className="App" style={{backgroundColor: '#E0E0E0'}}>
-        <Grid>
-          <Row className="show-grid">
-            {this.props.electivos.map((electivo, index) => [
-            ((index % 3 == 0)
-            ? (<Row />)
-            : null),
-              <Col sm={12} md={4}>
-                <Electivo name={electivo.name} comments={electivo.comments} />
-              </Col>
-            ])}
-          </Row>
-        </Grid>
+      <Grid>
+      <Row className="show-grid">
+      {this.props.electivos.map((electivo, index) => [
+        ((index % 3 == 0)
+        ? (<Row />)
+        : null),
+        <Col sm={12} md={4}>
+        <Electivo name={electivo.name} comments={electivo.comments} />
+        </Col>
+      ])}
+      </Row>
+      </Grid>
       </div>
     );
   }
@@ -44,7 +44,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchCoursesSuccess: (courses) =>
-    dispatch(fetchCoursesSuccess(courses))
+  dispatch(fetchCoursesSuccess(courses))
 });
 
 const ElectivoApp = connect(
