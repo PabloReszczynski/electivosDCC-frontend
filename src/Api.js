@@ -22,11 +22,16 @@ const create = () => {
     return api.get('/courses')
   }
 
+  const sendComment = (id, comment) => {
+    return api.post('/courses/comments', {id, comment})
+  }
+
   // ------
   // Export
   // ------
   return {
-    fetchCourses
+    fetchCourses,
+    sendComment
   }
 }
 

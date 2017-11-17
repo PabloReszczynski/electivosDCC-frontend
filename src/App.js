@@ -5,7 +5,7 @@ import './App.css';
 import Electivo from './components/Electivo.jsx';
 import electivos from './electivos2.js';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { fetchCoursesSuccess } from './state/store'
+import { fetchCoursesSuccess, newComment } from './state/store'
 import Api from './Api';
 
 class App extends Component {
@@ -28,7 +28,7 @@ class App extends Component {
             ? (<Row />)
             : null),
               <Col sm={12} md={4}>
-                <Electivo name={electivo.name} comments={electivo.comments} />
+                <Electivo name={electivo.name} comments={electivo.comments} id={electivo.id} newComment={comment => this.props.newComment(comment, electivo.id)}/>
               </Col>
             ])}
           </Row>
@@ -44,7 +44,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchCoursesSuccess: (courses) =>
-    dispatch(fetchCoursesSuccess(courses))
+    dispatch(fetchCoursesSuccess(courses)),
+  newComment: (comment, id) =>
+    dispatch(newComment(comment, id))
 });
 
 const ElectivoApp = connect(
