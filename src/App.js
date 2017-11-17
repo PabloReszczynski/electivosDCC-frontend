@@ -12,9 +12,11 @@ class App extends Component {
 
   componentDidMount() {
     Api.fetchCourses().then((response) => {
-      this.props.fetchCoursesSuccess(response.data.electivos)
-    }).catch(() => {
+      console.log(response);
+      response.data && this.props.fetchCoursesSuccess(response.data.electivos)
+    }).catch(err => {
       alert('El sitio tiene problemas, por favor intentalo de nuevo mas tarde.')
+      console.error(err);
     })
   }
 

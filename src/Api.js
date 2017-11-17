@@ -5,8 +5,11 @@ const create = () => {
   // Configuration
   // ------
 
+  const BASE_URL = process.env.BASE_URL || 'http://localhost';
+  const PORT = process.env.PORT || '8000';
+
   const api = apisauce.create({
-    baseURL: 'https://electivosdcc.herokuapp.com',
+    baseURL: `${BASE_URL}:${PORT}`,
     headers: {
       // 'Cache-Control': 'no-cache',
       // 'Content-Type': 'application/json'
@@ -19,7 +22,7 @@ const create = () => {
   // ------
 
   const fetchCourses = () => {
-    return api.get('/courses')
+    return api.get('/courses').catch(console.error)
   }
 
   const sendComment = (id, comment) => {
