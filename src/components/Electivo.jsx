@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Comment from './Comment.jsx';
 import { Col } from 'react-bootstrap';
+import CommentForm from './CommentForm.jsx';
 
 const styles = {
   container: {
@@ -16,6 +17,10 @@ const styles = {
     padding: '10px',
     backgroundColor: '#2196F3',
     color: 'white'
+  },
+  footer: {
+    padding: '10px',
+    backgroundColor: '#1565C0'
   }
 }
 
@@ -27,10 +32,16 @@ export default class Electivo extends Component {
         <div style={styles.header}>
           <h1>{this.props.name}</h1>
         </div>
-        <div style={styles.comments}>
+        <div style={styles.comments} ref={(ref) => {this.divComments = ref}}>
           {this.props.comments.map(comment => (
             <Comment txt={comment.txt} votes={comment.votes} />
           ))}
+        </div>
+        <div style={styles.footer}>
+          <CommentForm id={this.props.id} newComment={comment => {
+            this.props.newComment(comment);
+            this.divComments.scrollTop = this.divComments.scrollHeight;
+          }}/>
         </div>
       </div>
     )

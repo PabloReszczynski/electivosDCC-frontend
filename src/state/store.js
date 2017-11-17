@@ -12,6 +12,29 @@ const store = createStore((state = initialState, action) => {
         electivos: action.payload.courses
       }
       break
+    case 'NEW_COMMENT':
+      return {
+        ...state,
+        electivos: state.electivos.map(electivo => {
+          if(electivo.id != action.payload.id) {
+            return electivo;
+          } else {
+            return {
+              ...electivo,
+              comments: [
+                ...electivo.comments, {
+                  id: -1,
+                  txt: action.payload.comment,
+                  votes: {
+                    up: 0,
+                    down: 0
+                  }
+                }
+              ]
+            }
+          }
+        }) 
+      }
   }
   return state
 });
@@ -23,5 +46,11 @@ export const fetchCoursesSuccess = courses => ({
   }
 })
 
+export const newComment = (comment, id) => ({
+  type: 'NEW_COMMENT',
+  payload: {
+    comment, id 
+  }
+})
 
 export default store;

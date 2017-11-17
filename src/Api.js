@@ -25,11 +25,16 @@ const create = () => {
     return api.get('/courses').catch(console.error)
   }
 
+  const sendComment = (id, comment) => {
+    return api.post('/courses/comments', {id, comment})
+  }
+
   // ------
   // Export
   // ------
   return {
-    fetchCourses
+    fetchCourses,
+    sendComment
   }
 }
 
