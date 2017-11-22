@@ -9,7 +9,8 @@ const create = () => {
   const PORT = process.env.API_PORT || '8000';
 
   const api = apisauce.create({
-    baseURL: `${BASE_URL}:${PORT}`,
+    // baseURL: `${BASE_URL}:${PORT}`,
+    baseURL: 'https://electivosdcc.herokuapp.com',
     headers: {
       // 'Cache-Control': 'no-cache',
       // 'Content-Type': 'application/json'
