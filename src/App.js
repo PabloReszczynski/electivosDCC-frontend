@@ -30,7 +30,7 @@ class App extends Component {
             ? (<Row />)
             : null),
               <Col sm={12} md={4}>
-                <Electivo name={electivo.name} comments={electivo.comments} id={electivo.id} newComment={comment => this.props.newComment(comment, electivo.id)}/>
+                <Electivo sendLike={this.props.sendLike} sendDislike={this.props.sendDislike} name={electivo.name} comments={electivo.comments} id={electivo.id} newComment={comment => this.props.newComment(comment, electivo.id)}/>
               </Col>
             ])}
           </Row>

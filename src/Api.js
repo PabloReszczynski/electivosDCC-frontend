@@ -30,6 +30,10 @@ const create = () => {
     return api.post('/courses/comments', {id, comment})
   }
 
+  const postLike = (comm_id) => {
+    return api.post('/courses/comments/like', {id: comm_id})
+  }
+
   // ------
   // Export
   // ------
