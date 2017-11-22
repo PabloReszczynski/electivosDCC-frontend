@@ -21,7 +21,6 @@ const styles = {
 
 export default class Electivo extends Component {
     render() {
-        console.log(this.props);
         return (
             <div style={styles.container}>
                 <div style={styles.header}>
@@ -29,8 +28,7 @@ export default class Electivo extends Component {
                 </div>
                 <div style={styles.comments}>
                     {this.props.comments.map(comment => (
-                        <Comment txt={comment.txt} votes={comment.votes}/>
-                    ))}
+                        <Comment sendLike={this.props.sendLike} sendDislike={this.props.sendDislike} {...comment} />                    ))}
                 </div>
             </div>
         )

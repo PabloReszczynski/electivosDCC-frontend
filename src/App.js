@@ -28,8 +28,8 @@ class App extends Component {
             ? (<Row />)
             : null),
               <Col sm={12} md={4}>
-                <Electivo name={electivo.name} comments={electivo.comments} />
-              </Col>
+                <Electivo sendLike={this.props.sendLike} sendDislike={this.props.sendDislike} name={electivo.name} comments={electivo.comments} />
+                </Col>
             ])}
           </Row>
         </Grid>
