@@ -35,6 +35,34 @@ const store = createStore((state = initialState, action) => {
           }
         }) 
       }
+      break
+    case 'POST_LIKE_SUCCESS':
+      return {
+        ...state,
+        electivos: state.electivos.map(electivo => {
+          if (electivo.id != action.payload.course_id) {
+            return electivo
+          } else {
+            return {
+              ...electivo,
+              comments: electivo.comments.map(comment => {
+                if (comment.id != action.payload.comment_id) {
+                  return comment
+                } else {
+                  return {
+                    ...comment,
+                    votes: {
+                      up: comment.votes.up + 1,
+                      down: comment.votes.down
+                    }
+                  }
+                }
+              })
+            }
+          }
+        })
+      }
+      break
   }
   return state
 });
@@ -50,6 +78,14 @@ export const newComment = (comment, id) => ({
   type: 'NEW_COMMENT',
   payload: {
     comment, id 
+  }
+})
+
+export const postLikeSuccess = (course_id, comment_id) => ({
+  type: 'POST_LIKE_SUCCESS',
+  payload: {
+    course_id,
+    comment_id
   }
 })
 

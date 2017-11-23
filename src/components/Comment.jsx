@@ -23,10 +23,14 @@ export default class Comment extends Component {
             <Panel style={styles.panel}>
                 <Panel style={{...styles.panel, ...styles.panelText}}>{this.props.txt}</Panel>
                 <div>
-                    <Glyphicon onClick={() => this.sendLike()} glyph="thumbs-up" style={styles.icon}>
+                    <Glyphicon
+                        onClick={() =>
+                            this.props.sendLike(this.props.course_id, this.props.id)
+                        }
+                        glyph="thumbs-up" style={styles.icon}>
                         <Badge style={styles.badge}>{(this.props.votes || {up: 0}).up}</Badge>
                     </Glyphicon>
-                    < Glyphicon onClick={() => this.sendDislike()} glyph="thumbs-down" style={styles.icon}>
+                    <Glyphicon onClick={() => this.props.sendDislike()} glyph="thumbs-down" style={styles.icon}>
                         <Badge style={styles.badge}>{(this.props.votes || {down: 0}).down}</Badge>
                     </Glyphicon>
                 </div>

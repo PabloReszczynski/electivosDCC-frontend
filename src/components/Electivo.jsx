@@ -34,7 +34,11 @@ export default class Electivo extends Component {
         </div>
         <div style={styles.comments} ref={(ref) => {this.divComments = ref}}>
           {this.props.comments.map(comment => (
-            <Comment sendLike={this.props.sendLike} sendDislike={this.props.sendDislike} {...comment} />
+            <Comment
+              course_id={this.props.id}
+              sendLike={this.props.sendLike}
+              sendDislike={this.props.sendDislike} {...comment}
+            />
           ))}
         </div>
         <div style={styles.footer}>

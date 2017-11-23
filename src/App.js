@@ -5,7 +5,7 @@ import './App.css';
 import Electivo from './components/Electivo.jsx';
 import electivos from './electivos2.js';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { fetchCoursesSuccess, newComment } from './state/store'
+import { fetchCoursesSuccess, newComment, postLikeSuccess } from './state/store'
 import Api from './Api';
 
 class App extends Component {
@@ -20,6 +20,28 @@ class App extends Component {
     })
   }
 
+  sendLike (course_id, comment_id) {
+    Api.postLike(comment_id).then((response) => {
+      console.log(response);
+      this.props.postLikeSuccess(course_id, comment_id)
+    }).catch(err => {
+      alert('El sitio tiene problemas, por favor intentalo de nuevo mas tarde.')
+      console.error(err);
+    })
+    console.log('sendLike')
+  }
+
+  sendDislike () {
+    // Api.fetchCourses().then((response) => {
+    //   console.log(response);
+    //   response.data && this.props.fetchCoursesSuccess(response.data.electivos)
+    // }).catch(err => {
+    //   alert('El sitio tiene problemas, por favor intentalo de nuevo mas tarde.')
+    //   console.error(err);
+    // })
+    // console.log('sendDislike') 
+  }
+
   render() {
     return (
       <div className="App" style={{backgroundColor: '#E0E0E0'}}>
@@ -30,7 +52,14 @@ class App extends Component {
             ? (<Row />)
             : null),
               <Col sm={12} md={4}>
-                <Electivo sendLike={this.props.sendLike} sendDislike={this.props.sendDislike} name={electivo.name} comments={electivo.comments} id={electivo.id} newComment={comment => this.props.newComment(comment, electivo.id)}/>
+                <Electivo
+                  sendLike={(course_id, comment_id) => this.sendLike(course_id, comment_id)}
+                  sendDislike={(course_id, comment_id) => this.sendDislike(course_id, comment_id)}
+                  name={electivo.name}
+                  comments={electivo.comments}
+                  id={electivo.id}
+                  newComment={comment => this.props.newComment(comment, electivo.id)}
+                />
               </Col>
             ])}
           </Row>
@@ -48,7 +77,9 @@ const mapDispatchToProps = dispatch => ({
   fetchCoursesSuccess: (courses) =>
     dispatch(fetchCoursesSuccess(courses)),
   newComment: (comment, id) =>
-    dispatch(newComment(comment, id))
+    dispatch(newComment(comment, id)),
+  postLikeSuccess: (comment, id) =>
+    dispatch(postLikeSuccess(comment, id))
 });
 
 const ElectivoApp = connect(

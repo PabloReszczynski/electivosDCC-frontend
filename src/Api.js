@@ -39,7 +39,8 @@ const create = () => {
   // ------
   return {
     fetchCourses,
-    sendComment
+    sendComment,
+    postLike
   }
 }
 
