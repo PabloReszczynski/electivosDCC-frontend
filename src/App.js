@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   sendLike (course_id, comment_id) {
-    console.log(comment_id);
     Api.postLike(comment_id).then((response) => {
       console.log(response);
       this.props.postLikeSuccess(course_id, comment_id)
@@ -33,7 +32,6 @@ class App extends Component {
   }
 
   sendDislike (course_id, comment_id) {
-    console.log(comment_id);
     Api.postDislike(comment_id).then((response) => {
       console.log(response);
       this.props.postDislikeSuccess(course_id, comment_id)
