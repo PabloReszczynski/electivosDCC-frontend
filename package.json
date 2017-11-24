@@ -4,7 +4,11 @@
   "private": true,
   "dependencies": {
     "apisauce": "^0.14.1",
+    "chai": "^4.1.2",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-15": "^1.0.5",
     "jquery": "^3.2.1",
+    "mocha": "^4.0.1",
     "ramda": "^0.25.0",
     "react": "^16.1.0",
     "react-bootstrap": "^0.31.5",

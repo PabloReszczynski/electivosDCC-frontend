@@ -16,7 +16,8 @@ export default class CommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      'comment': ''
+      'comment': '',
+      api
     }
   }
 
@@ -30,7 +31,7 @@ export default class CommentForm extends Component {
   send() {
     const comment = this.state.comment;
     if(comment.length > 0) {
-      api.sendComment(this.props.id, this.state.comment).then(response => {
+      this.state.api.sendComment(this.props.id, this.state.comment).then(response => {
         if(response.ok) {
           this.props.newComment(comment);
         }
