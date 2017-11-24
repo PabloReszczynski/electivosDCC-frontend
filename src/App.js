@@ -11,7 +11,6 @@ import Api from './Api';
 class App extends Component {
 
   componentDidMount() {
-    
     Api.fetchCourses().then((response) => {
       console.log(response);
       response.data && this.props.fetchCoursesSuccess(response.data.electivos)
@@ -61,7 +60,7 @@ class App extends Component {
                   name={electivo.name}
                   comments={electivo.comments}
                   id={electivo.id}
-                  newComment={comment => this.props.newComment(comment, electivo.id)}
+                  newComment={(comment, comm_id) => this.props.newComment(comment, comm_id, electivo.id)}
                 />
               </Col>
             ])}
@@ -79,8 +78,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchCoursesSuccess: (courses) =>
     dispatch(fetchCoursesSuccess(courses)),
-  newComment: (comment, id) =>
-    dispatch(newComment(comment, id)),
+  newComment: (comment, comm_id, elec_id) =>
+    dispatch(newComment(comment, comm_id, elec_id)),
   postLikeSuccess: (comment, id) =>
     dispatch(postLikeSuccess(comment, id)),
   postDislikeSuccess: (comment, id) =>

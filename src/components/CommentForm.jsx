@@ -32,7 +32,7 @@ export default class CommentForm extends Component {
     if(comment.length > 0) {
       api.sendComment(this.props.id, this.state.comment).then(response => {
         if(response.ok) {
-          this.props.newComment(comment);
+          this.props.newComment(comment, response.id);
         }
       })
       this.setState({

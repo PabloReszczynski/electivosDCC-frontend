@@ -42,8 +42,8 @@ export default class Electivo extends Component {
           ))}
         </div>
         <div style={styles.footer}>
-          <CommentForm id={this.props.id} newComment={comment => {
-            this.props.newComment(comment);
+          <CommentForm id={this.props.id} newComment={(comment, comm_id) => {
+            this.props.newComment(comment, comm_id);
             this.divComments.scrollTop = this.divComments.scrollHeight;
           }}/>
         </div>
