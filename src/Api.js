@@ -34,13 +34,18 @@ const create = () => {
     return api.post('/courses/comments/like', {id: comm_id})
   }
 
+  const postDislike = (comm_id) => {
+    return api.post('/courses/comments/dislike', {id: comm_id})
+  }
+
   // ------
   // Export
   // ------
   return {
     fetchCourses,
     sendComment,
-    postLike
+    postLike,
+    postDislike
   }
 }
 

@@ -5,12 +5,13 @@ import './App.css';
 import Electivo from './components/Electivo.jsx';
 import electivos from './electivos2.js';
 import { Grid, Row, Col } from 'react-bootstrap';
-import { fetchCoursesSuccess, newComment, postLikeSuccess } from './state/store'
+import { fetchCoursesSuccess, newComment, postLikeSuccess, postDislikeSuccess } from './state/store'
 import Api from './Api';
 
 class App extends Component {
 
   componentDidMount() {
+    
     Api.fetchCourses().then((response) => {
       console.log(response);
       response.data && this.props.fetchCoursesSuccess(response.data.electivos)
@@ -21,6 +22,7 @@ class App extends Component {
   }
 
   sendLike (course_id, comment_id) {
+    console.log(comment_id);
     Api.postLike(comment_id).then((response) => {
       console.log(response);
       this.props.postLikeSuccess(course_id, comment_id)
@@ -31,15 +33,16 @@ class App extends Component {
     console.log('sendLike')
   }
 
-  sendDislike () {
-    // Api.fetchCourses().then((response) => {
-    //   console.log(response);
-    //   response.data && this.props.fetchCoursesSuccess(response.data.electivos)
-    // }).catch(err => {
-    //   alert('El sitio tiene problemas, por favor intentalo de nuevo mas tarde.')
-    //   console.error(err);
-    // })
-    // console.log('sendDislike') 
+  sendDislike (course_id, comment_id) {
+    console.log(comment_id);
+    Api.postDislike(comment_id).then((response) => {
+      console.log(response);
+      this.props.postDislikeSuccess(course_id, comment_id)
+    }).catch(err => {
+      alert('El sitio tiene problemas, por favor intentalo de nuevo mas tarde.')
+      console.error(err);
+    })
+    console.log('sendDislike') 
   }
 
   render() {
@@ -79,7 +82,9 @@ const mapDispatchToProps = dispatch => ({
   newComment: (comment, id) =>
     dispatch(newComment(comment, id)),
   postLikeSuccess: (comment, id) =>
-    dispatch(postLikeSuccess(comment, id))
+    dispatch(postLikeSuccess(comment, id)),
+  postDislikeSuccess: (comment, id) =>
+    dispatch(postDislikeSuccess(comment, id)),
 });
 
 const ElectivoApp = connect(

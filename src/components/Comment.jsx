@@ -30,7 +30,7 @@ export default class Comment extends Component {
                         glyph="thumbs-up" style={styles.icon}>
                         <Badge style={styles.badge}>{(this.props.votes || {up: 0}).up}</Badge>
                     </Glyphicon>
-                    <Glyphicon onClick={() => this.props.sendDislike()} glyph="thumbs-down" style={styles.icon}>
+                    <Glyphicon onClick={() => this.props.sendDislike(this.props.course_id, this.props.id)} glyph="thumbs-down" style={styles.icon}>
                         <Badge style={styles.badge}>{(this.props.votes || {down: 0}).down}</Badge>
                     </Glyphicon>
                 </div>
