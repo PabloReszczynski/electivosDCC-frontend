@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Comment from './Comment.jsx';
 import { Col } from 'react-bootstrap';
 import CommentForm from './CommentForm.jsx';
+import { sortBy, path, negate, compose } from 'ramda';
 
 const styles = {
   container: {
@@ -22,17 +23,19 @@ const styles = {
     padding: '10px',
     backgroundColor: '#1565C0'
   }
-}
+};
+
+const orderByLikes = sortBy(compose(negate, path(['votes', 'up'])));
 
 export default class Electivo extends Component {
   render() {
     return (
-      <div style={styles.container}> 
+      <div style={styles.container}>
         <div style={styles.header}>
           <h1>{this.props.name}</h1>
         </div>
         <div style={styles.comments} ref={(ref) => {this.divComments = ref}}>
-          {this.props.comments.map(comment => (
+          {orderByLikes(this.props.comments).map(comment => (
             <Comment
               course_id={this.props.id}
               sendLike={this.props.sendLike}
@@ -45,8 +48,8 @@ export default class Electivo extends Component {
             this.props.newComment(comment, comm_id);
             this.divComments.scrollTop = this.divComments.scrollHeight;
           }}/>
-        </div>
       </div>
+    </div>
     )
   }
 }
